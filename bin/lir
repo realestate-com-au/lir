@@ -1,0 +1,12 @@
+#! /bin/sh
+
+if [ "$LIR_HOME" = "" ] ; then
+    echo "Please set your LIR_HOME"
+    exit 1
+fi
+
+for arg in "$@" ; do
+    ant_exec_args="$ant_exec_args $arg"
+done
+
+java -classpath "$LIR_HOME/lib/*:$LIR_HOME/classes/." com.lir.cli.Lir $ant_exec_args

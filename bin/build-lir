@@ -1,0 +1,17 @@
+#! /bin/sh
+
+if [ "$LIR_HOME" = "" ] ; then
+    echo "Please set your LIR_HOME"
+    exit 1
+fi
+
+if [ -d "$LIR_HOME/classes" ]; then
+  echo "build-lir: Removing existing classes"
+  rm -rf $LIR_HOME/classes
+fi
+
+mkdir $LIR_HOME/classes
+echo "build-lir: Compiling Source files..."
+javac -d $LIR_HOME/classes -classpath "$LIR_HOME/lib/*" $LIR_HOME/src/com/lir/idxreader/*.java
+javac -d $LIR_HOME/classes -classpath "$LIR_HOME/lib/*:$LIR_HOME/classes/." $LIR_HOME/src/com/lir/cli/*.java
+echo "build-lir: Done"
